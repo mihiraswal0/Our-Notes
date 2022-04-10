@@ -1,22 +1,77 @@
-$("#updateusernameform").submit(function(event){
-//    prevent default php processing
+// Ajax call to updateusername.php
+$("#updateusernameform").submit(function(event){ 
+    //prevent default php processing
     event.preventDefault();
-    var datapost=$(this).serializeArray();
-   
-//    window.alert(echo "hogya");
-    //send them to signup.php using AJAX
+    //collect user inputs
+    var datatopost = $(this).serializeArray();
+//    console.log(datatopost);
+    //send them to updateusername.php using AJAX
     $.ajax({
-    url: "updateusername.php",
-        type:"POST",
-        data:datapost,
-        success:function(data){
-           if(data) {$("#updateusernamemessage").html(data);}
-            else
-               { location.reload();}
+        url: "updateusername.php",
+        type: "POST",
+        data: datatopost,
+        success: function(data){
+            if(data){
+                $("#updateusernamemessage").html(data);
+            }else{
+                location.reload();   
+            }
         },
-        error:function(){
-           $("#updateusernamemessage").html("<div class='alert alert-danger'>There was an error with ajax call.. Please Try again later</div>"); 
+        error: function(){
+            $("#updateusernamemessage").html("<div class='alert alert-danger'>There was an error with the Ajax Call. Please try again later.</div>");
+            
         }
-        
+    
     });
+
+});
+
+// Ajax call to updatepassword.php
+$("#updatepasswordform").submit(function(event){ 
+   
+    event.preventDefault();
+  
+    var datatopost = $(this).serializeArray();
+
+    $.ajax({
+        url: "updatepassword.php",
+        type: "POST",
+        data: datatopost,
+        success: function(data){
+            if(data){
+                $("#updatepasswordmessage").html(data);
+            }
+        },
+        error: function(){
+            $("#updatepasswordmessage").html("<div class='alert alert-danger'>There was an error with the Ajax Call. Please try again later.</div>");
+            
+        }
+    
+    });
+
+});
+
+
+
+// Ajax call to updateemail.php
+$("#updateemailform").submit(function(event){ 
+    event.preventDefault();
+    var datatopost = $(this).serializeArray();
+//  
+    $.ajax({
+        url: "updateemail.php",
+        type: "POST",
+        data: datatopost,
+        success: function(data){
+            if(data){
+                $("#updateemailmessage").html(data);
+            }
+        },
+        error: function(){
+            $("#updateemailmessage").html("<div class='alert alert-danger'>There was an error with the Ajax Call. Please try again later.</div>");
+            
+        }
+    
+    });
+
 });
